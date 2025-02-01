@@ -16,3 +16,7 @@ export interface User extends base {
   usuarioEmail: string;
   usuarioTelefono: string;
 }
+export interface responseUser {
+  usuarios: User[];
+  success: boolean;
+}
