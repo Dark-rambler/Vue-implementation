@@ -5,8 +5,11 @@
 //   phone: string;
 //   website: string;
 // }
-export interface User {
-  id: number;
+
+export interface base {
+  index?: number;
+}
+export interface User extends base {
   usuarioNombre: string;
   usuarioApellidoPaterno: string;
   usuarioApellidoMaterno: string;

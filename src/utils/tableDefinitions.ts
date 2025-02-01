@@ -3,7 +3,6 @@ import type { DataTableDefinitionInterface } from "@/interfaces/dataTableDefinit
 
 export function getUserTableDefinition(): DataTableDefinitionInterface<User>[] {
   return [
-    { key: "id", label: "ID" },
     { key: "usuarioNombre", label: "Nombre" },
     { key: "usuarioApellidoPaterno", label: "Apellido Paterno" },
     { key: "usuarioApellidoMaterno", label: "Apellido Materno" },

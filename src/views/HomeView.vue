@@ -1,10 +1,38 @@
+<template>
+  <main>
+    <div class="mt-5 d-flex justify-content-between align-items-center">
+      <h2>Lista de usuarios</h2>
+      <div class="input-group mb-3 w-25">
+        <span class="input-group-text bi bi-search"></span>
+        <input type="text" class="form-control" placeholder="Buscar Usuario" aria-label="Username"
+          aria-describedby="basic-addon1">
+      </div>
+    </div>
+    <AppDataTable :data="tableData">
+      <template #actions="{ row }">
+        <button @click="userSelected = row" class="btn btn-danger" type="button" data-bs-toggle="modal"
+          data-bs-target="#modalDelete">
+          <i class="bi bi-trash3"></i>
+        </button>
+        <button class="btn btn-primary ms-2" type="button" data-bs-toggle="modal" data-bs-target="#modalCamera"
+          @click="startCamera">
+          <i class="bi bi-camera"></i>
+        </button>
+      </template>
+    </AppDataTable>
+    <ModalDelete @delete="deleteUser($event)" :data="userSelected" />
+    <ModalCamera ref="childRef" />
+  </main>
+</template>
+
 <script setup lang="ts">
 import AppDataTable from '@/components/AppDataTable.vue';
+import ModalCamera from '@/components/ModalCamera.vue';
+import ModalDelete from '@/components/ModalDelete.vue';
 import type { User } from '@/interfaces/dataTable.interface';
 import { ref } from 'vue';
 const tableData = ref<User[]>([
   {
-    id: 1,
     usuarioNombre: 'Leanne Graham',
     usuarioApellidoPaterno: 'Bret',
     usuarioApellidoMaterno: 'Bret',
@@ -12,7 +40,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '1-770-736-8031 x56442',
   },
   {
-    id: 2,
     usuarioNombre: 'Ervin Howell',
     usuarioApellidoPaterno: 'Antonette',
     usuarioApellidoMaterno: 'Antonette',
@@ -20,7 +47,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '010-692-6593 x09125',
   },
   {
-    id: 3,
     usuarioNombre: 'Clementine Bauch',
     usuarioApellidoPaterno: 'Samantha',
     usuarioApellidoMaterno: 'Samantha',
@@ -28,7 +54,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '1-463-123-4447',
   },
   {
-    id: 4,
     usuarioNombre: 'Patricia Lebsack',
     usuarioApellidoPaterno: 'Karianne',
     usuarioApellidoMaterno: 'Karianne',
@@ -36,7 +61,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '493-170-9623 x156',
   },
   {
-    id: 5,
     usuarioNombre: 'Arnaldo Lebsack',
     usuarioApellidoPaterno: 'asd',
     usuarioApellidoMaterno: 'Karianne',
@@ -44,7 +68,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '493-170-9623 x156',
   },
   {
-    id: 6,
     usuarioNombre: 'Ruben Lebsack',
     usuarioApellidoPaterno: 'Karianne',
     usuarioApellidoMaterno: 'Karianne',
@@ -52,7 +75,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '493-170-9623 x156',
   },
   {
-    id: 7,
     usuarioNombre: 'Miguel Lebsack',
     usuarioApellidoPaterno: 'Karianne',
     usuarioApellidoMaterno: 'Karianne',
@@ -60,7 +82,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '493-170-9623 x156',
   },
   {
-    id: 8,
     usuarioNombre: 'Patricia Lebsack',
     usuarioApellidoPaterno: 'Karianne',
     usuarioApellidoMaterno: 'Karianne',
@@ -68,7 +89,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '493-170-9623 x156',
   },
   {
-    id: 9,
     usuarioNombre: 'Juan Perez',
     usuarioApellidoPaterno: 'Gomez',
     usuarioApellidoMaterno: 'Lopez',
@@ -76,7 +96,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '123-456-7890',
   },
   {
-    id: 10,
     usuarioNombre: 'Maria Garcia',
     usuarioApellidoPaterno: 'Fernandez',
     usuarioApellidoMaterno: 'Martinez',
@@ -84,7 +103,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '234-567-8901',
   },
   {
-    id: 11,
     usuarioNombre: 'Carlos Sanchez',
     usuarioApellidoPaterno: 'Rodriguez',
     usuarioApellidoMaterno: 'Hernandez',
@@ -92,7 +110,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '345-678-9012',
   },
   {
-    id: 12,
     usuarioNombre: 'Ana Lopez',
     usuarioApellidoPaterno: 'Diaz',
     usuarioApellidoMaterno: 'Gutierrez',
@@ -100,7 +117,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '456-789-0123',
   },
   {
-    id: 13,
     usuarioNombre: 'Luis Torres',
     usuarioApellidoPaterno: 'Ramirez',
     usuarioApellidoMaterno: 'Vargas',
@@ -108,7 +124,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '567-890-1234',
   },
   {
-    id: 14,
     usuarioNombre: 'Sofia Ramirez',
     usuarioApellidoPaterno: 'Morales',
     usuarioApellidoMaterno: 'Castro',
@@ -116,7 +131,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '678-901-2345',
   },
   {
-    id: 15,
     usuarioNombre: 'Jorge Castro',
     usuarioApellidoPaterno: 'Ortega',
     usuarioApellidoMaterno: 'Rojas',
@@ -124,7 +138,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '789-012-3456',
   },
   {
-    id: 16,
     usuarioNombre: 'Lucia Rojas',
     usuarioApellidoPaterno: 'Silva',
     usuarioApellidoMaterno: 'Mendoza',
@@ -132,7 +145,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '890-123-4567',
   },
   {
-    id: 17,
     usuarioNombre: 'Pedro Mendoza',
     usuarioApellidoPaterno: 'Carrillo',
     usuarioApellidoMaterno: 'Guerrero',
@@ -140,7 +152,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '901-234-5678',
   },
   {
-    id: 18,
     usuarioNombre: 'Carmen Guerrero',
     usuarioApellidoPaterno: 'Vega',
     usuarioApellidoMaterno: 'Fuentes',
@@ -148,7 +159,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '012-345-6789',
   },
   {
-    id: 19,
     usuarioNombre: 'Ricardo Fuentes',
     usuarioApellidoPaterno: 'Mendez',
     usuarioApellidoMaterno: 'Rios',
@@ -156,7 +166,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '123-456-7890',
   },
   {
-    id: 20,
     usuarioNombre: 'Elena Rios',
     usuarioApellidoPaterno: 'Paredes',
     usuarioApellidoMaterno: 'Navarro',
@@ -164,7 +173,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '234-567-8901',
   },
   {
-    id: 21,
     usuarioNombre: 'Fernando Navarro',
     usuarioApellidoPaterno: 'Cortes',
     usuarioApellidoMaterno: 'Miranda',
@@ -172,7 +180,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '345-678-9012',
   },
   {
-    id: 22,
     usuarioNombre: 'Isabel Miranda',
     usuarioApellidoPaterno: 'Soto',
     usuarioApellidoMaterno: 'Cardenas',
@@ -180,7 +187,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '456-789-0123',
   },
   {
-    id: 23,
     usuarioNombre: 'Oscar Cardenas',
     usuarioApellidoPaterno: 'Campos',
     usuarioApellidoMaterno: 'Aguilar',
@@ -188,7 +194,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '567-890-1234',
   },
   {
-    id: 24,
     usuarioNombre: 'Adriana Aguilar',
     usuarioApellidoPaterno: 'Valdez',
     usuarioApellidoMaterno: 'Reyes',
@@ -196,7 +201,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '678-901-2345',
   },
   {
-    id: 25,
     usuarioNombre: 'Raul Reyes',
     usuarioApellidoPaterno: 'Orozco',
     usuarioApellidoMaterno: 'Soria',
@@ -204,7 +208,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '789-012-3456',
   },
   {
-    id: 26,
     usuarioNombre: 'Gabriela Soria',
     usuarioApellidoPaterno: 'Mejia',
     usuarioApellidoMaterno: 'Espinoza',
@@ -212,7 +215,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '890-123-4567',
   },
   {
-    id: 27,
     usuarioNombre: 'Hector Espinoza',
     usuarioApellidoPaterno: 'Nunez',
     usuarioApellidoMaterno: 'Delgado',
@@ -220,7 +222,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '901-234-5678',
   },
   {
-    id: 28,
     usuarioNombre: 'Monica Delgado',
     usuarioApellidoPaterno: 'Salazar',
     usuarioApellidoMaterno: 'Cruz',
@@ -228,7 +229,6 @@ const tableData = ref<User[]>([
     usuarioTelefono: '012-345-6789',
   },
   {
-    id: 29,
     usuarioNombre: 'Roberto Cruz',
     usuarioApellidoPaterno: 'Ibarra',
     usuarioApellidoMaterno: 'Lara',
@@ -236,18 +236,34 @@ const tableData = ref<User[]>([
     usuarioTelefono: '123-456-7890',
   },
   {
-    id: 30,
     usuarioNombre: 'Laura Lara',
     usuarioApellidoPaterno: 'Mora',
     usuarioApellidoMaterno: 'Flores',
     usuarioEmail: 'laura@gmail.com',
     usuarioTelefono: '234-567-8901',
   },
+  {
+    usuarioNombre: 'Rosa Flores',
+    usuarioApellidoPaterno: 'Cabrera',
+    usuarioApellidoMaterno: 'Villanueva',
+    usuarioEmail: 'asdasdasdsda-as das das',
+    usuarioTelefono: '345-678-9012',
+  },
 ]);
-</script>
 
-<template>
-  <main>
-    <AppDataTable :data="tableData" />
-  </main>
-</template>
+const userSelected = ref<User | null>(null);
+const childRef = ref<InstanceType<typeof ModalCamera> | null>(null);
+
+function startCamera() {
+  if (childRef.value) {
+    childRef.value.activeCamera();
+  }
+}
+
+const deleteUser = (user: User) => {
+  console.log('Eliminar fuera del modal', user.usuarioNombre);
+  const index = tableData.value.findIndex((u) => u.usuarioNombre === user.usuarioNombre);
+  tableData.value.splice(index, 1);
+  userSelected.value = null;
+};
+</script>
