@@ -7,7 +7,7 @@ import AppFooter from "./components/AppFooter.vue"
 <template>
   <AppNavbar />
   <main>
-    <div class="container-fluid">
+    <div class="container-md">
     <RouterView />
     </div>
     <AppFooter />
