@@ -1,21 +1,18 @@
 <script setup lang="ts">
+import AppNavbar from "./components/AppNavbar.vue"
+import AppFooter from "./components/AppFooter.vue"
 // import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-
-    <div class="">
-      <nav>
-        <!-- <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink> -->
-      </nav>
+  <AppNavbar />
+  <main>
+    <div class="container-fluid">
+    <RouterView />
     </div>
-  </header>
-
+    <AppFooter />
+  </main>
   <!-- <RouterView /> -->
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
