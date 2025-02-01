@@ -3,8 +3,8 @@
 
 <template>
   <main>
-    <div class=" mt-5 ">
-      <table class="table table-hover border">
+    <div class=" mt-5 border">
+      <table class="table table-hover ">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -32,7 +32,23 @@
             <td>@twitter</td>
           </tr>
         </tbody>
+
       </table>
+      <nav class="d-flex justify-content-center">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </main>
 </template>
