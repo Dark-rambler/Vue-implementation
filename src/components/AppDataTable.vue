@@ -1,21 +1,19 @@
 <template>
-  <div class="">
+  <div>
     <table class="table table-hover table-striped table-bordered">
       <thead>
         <tr>
-          <th scope="col">Indice</th>
-          <th scope="col" class="text-center" v-for="(item, index) in tableData" :key="index">{{ item.label }}</th>
-          <!-- Mostrar "Acciones" solo si hay un slot disponible -->
+          <th scope="col">#</th>
+          <th scope="col" class="text-center" v-for="(item, index) in definition" :key="index">{{ item.label }}</th>
           <th v-if="showActions" class="text-center">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user, index) in paginatedData" :key="index" class="">
+        <tr v-for="(item, index) in paginatedData" :key="index" class="">
           <td>{{ index + 1 + ((currentPage - 1) * itemsPerPage) }}</td>
-          <td v-for="(column, index) in tableData" :key="index">{{ user[column.key] }}</td>
-          <!-- Mostrar la columna de acciones solo si hay un slot -->
+          <td v-for="(column, index) in definition" :key="index">{{ item[column.key] }}</td>
           <td v-if="showActions" class="d-flex justify-content-center">
-            <slot name="actions" :row="user"></slot>
+            <slot name="actions" :row="item"></slot>
           </td>
         </tr>
       </tbody>
@@ -36,24 +34,23 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, computed, defineProps, useSlots } from 'vue';
-import type { User } from '@/interfaces/dataTable.interface';
+<script setup lang="ts" generic="T">
+import { ref, computed, defineProps, useSlots, watch } from 'vue';
 import type { DataTableDefinitionInterface } from '@/interfaces/dataTableDefinition.interface';
-import { getUserTableDefinition } from '@/utils/tableDefinitions';
 
-interface AppDataTableProps {
-  data: User[];
+interface AppDataTableProps<T> {
+  data: T[];
+  definition: DataTableDefinitionInterface<T>[];
 }
 
-const props = defineProps<AppDataTableProps>();
-const slots = useSlots(); // Acceder a los slots
-
-const tableData = ref<DataTableDefinitionInterface<User>[]>(getUserTableDefinition());
-
-// Lógica de paginación
+const props = defineProps<AppDataTableProps<T>>();
+const slots = useSlots();
 const currentPage = ref(1);
 const itemsPerPage = ref(10);
+
+watch(() => props.data, () => {
+  currentPage.value = 1;
+});
 
 const paginatedData = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
@@ -85,9 +82,3 @@ const prevPage = () => {
 
 const showActions = computed(() => !!slots.actions);
 </script>
-
-<style scoped>
-.cursor-pointer {
-  cursor: pointer;
-}
-</style>

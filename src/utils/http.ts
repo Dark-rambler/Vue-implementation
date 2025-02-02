@@ -11,11 +11,9 @@ export function getRequest<T>(url: string, params?: Record<string, unknown>): Pr
   return axios
     .get<T>(url, { params })
     .then((response: AxiosResponse<T>) => {
-      // Devuelve los datos de la respuesta
       return response.data;
     })
     .catch((error: AxiosError) => {
-      // Maneja el error y lanza una excepción
       console.error('Error en la petición GET:', error.message);
       throw error;
     });

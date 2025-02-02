@@ -7,7 +7,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ¿Estás seguro de eliminar este elemento?
+          ¿Estás seguro de eliminar este {{ elementName }}?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -19,21 +19,19 @@
 </template>
 
 <script setup lang="ts">
-interface ModalDeleteProps {
-  data: User | null;
-}
 import type { User } from '@/interfaces/dataTable.interface';
 import { defineProps } from 'vue';
 
 interface ModalDeleteProps {
   data: User | null;
+  elementName: string;
 }
 
 const props = defineProps<ModalDeleteProps>();
 
 const emiter = defineEmits(['delete']);
+
 const eliminar = () => {
-  console.log('Eliminar dentro de modal', props.data?.usuarioNombre);
   emiter('delete', props.data);
 }
 

@@ -1,10 +1,12 @@
 <template>
-  <div class="modal fade" id="modalCamera" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalCameraLabel" aria-hidden="true">
+  <div class="modal fade" id="modalCamera" tabindex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel"
+    data-bs-keyboard="false" aria-hidden="true" @hidden="stopCamera">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="modalCameraLabel">Cámara</h5>
-          <button type="button" class="btn-close" @click="stopCamera" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" @click="stopCamera" data-bs-dismiss="modal"
+            aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <video id="camera-preview" autoplay muted playsinline></video>
@@ -19,10 +21,9 @@
 
 <script setup lang="ts">
 import { onUnmounted } from 'vue';
-
 let stream: MediaStream | null = null;
 
-function activeCamera() {
+const activeCamera = () => {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     console.error('La API de MediaDevices no es soportada en este navegador.');
     return;
@@ -43,25 +44,24 @@ function activeCamera() {
     });
 }
 
-function stopCamera() {
+const stopCamera = () => {
   if (stream) {
-    stream.getTracks().forEach((track) => track.stop()); // Detiene todas las pistas de la transmisión
+    stream.getTracks().forEach((track) => track.stop());
     const videoElement = document.getElementById('camera-preview') as HTMLVideoElement;
     if (videoElement) {
-      videoElement.srcObject = null; // Limpia el elemento <video>
+      videoElement.srcObject = null;
     }
   }
 }
 
-// Detener la cámara cuando el componente se desmonta
 onUnmounted(() => {
   stopCamera();
 });
 
-// Exponer la función al componente padre
 defineExpose({
   activeCamera,
 });
+
 </script>
 
 <style scoped>

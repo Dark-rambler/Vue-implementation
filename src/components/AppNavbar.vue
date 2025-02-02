@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary py-4">
+    <div class="container-fluid px-5">
       <a class="navbar-brand" href="#">Four Sides Group</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,13 +24,9 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 import { RouterLink } from 'vue-router';
+
 const emit = defineEmits(['toggleDarkMode']);
 const isDarkMode = ref(localStorage.getItem("darkMode") === "true");
-
-const toggleDarkMode = () => {
-  isDarkMode.value = !isDarkMode.value;
-  emit('toggleDarkMode');
-};
 
 watchEffect(() => {
   document.documentElement.setAttribute(
@@ -39,7 +35,9 @@ watchEffect(() => {
   );
 });
 
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value;
+  emit('toggleDarkMode');
+};
 
-// const toggleDarkMode = () => {
-// };
 </script>
