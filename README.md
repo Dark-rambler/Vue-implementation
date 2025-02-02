@@ -1,38 +1,48 @@
 # vue-project
 
-This template should help get you started developing with Vue 3 in Vite.
+Este es un proyecto creado para realizar una prueba técnica con Vue3 
 
-## Recommended IDE Setup
+##  IDE Recommendado
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) 
 
-## Type Support for `.vue` Imports in TS
+## Clonar repositorio
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+```sh
+git clone https://github.com/Dark-rambler/Vue-implementation.git
+```
 
-## Customize configuration
+## Ingresar dentro de la carpeta del proyecto
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+```sh
+cd Vue-implementation
+```
 
-## Project Setup
+## Configuración del proyecto
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compilar y recargar en caliente para el desarrollo
 
 ```sh
 npm run dev
 ```
+### El proyecto se ejecutará por defecto en 
 
-### Type-Check, Compile and Minify for Production
+```sh
+http://localhost:5173/
+```
+
+
+### Comprobación de tipos, compilación y minimización para producción
 
 ```sh
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Lint con [ESLint](https://eslint.org/)
 
 ```sh
 npm run lint
