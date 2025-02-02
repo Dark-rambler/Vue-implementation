@@ -7,9 +7,9 @@
             <th scope="col">#</th>
             <th v-for="item in columnsToShow" :key="item.key" scope="col"
               :class="{ 'fade-out': !columnsToShow.includes(item) }">
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between text-truncate">
                 <div>{{ item.label }}</div>
-                <i class="bi bi-x-circle cursor-pointer" @click="hideColumn(item.key.toString())"></i>
+                <i class="bi bi-x-circle cursor-pointer ms-2" @click="hideColumn(item.key.toString())"></i>
               </div>
             </th>
             <th v-if="showActions" class="text-center">Acciones</th>
