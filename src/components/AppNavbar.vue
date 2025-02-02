@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary py-4">
+  <nav class="navbar navbar-expand-lg bg-body-secondary py-4">
     <div class="container-fluid px-5">
       <a class="navbar-brand" href="#">Four Sides Group</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -11,12 +11,20 @@
           <li class="nav-item">
             <RouterLink to="/" class="nav-link active" aria-current="page" href="#">Usuarios</RouterLink>
           </li>
+          <div class="d-block d-lg-none">
+            <button v-if="!isDarkMode" class="btn btn-gray border border-4 rounded bi bi-moon" @click="toggleDarkMode">
+            </button>
+            <button v-if="isDarkMode" class="btn btn-gray border border-4   bi bi-sun" @click="toggleDarkMode">
+            </button>
+          </div>
         </ul>
       </div>
-      <button v-if="!isDarkMode" class="btn btn-primary bi bi-moon" @click="toggleDarkMode">
-      </button>
-      <button v-if="isDarkMode" class="btn btn-primary bi bi-sun" @click="toggleDarkMode">
-      </button>
+      <div class="d-none d-lg-block">
+        <button v-if="!isDarkMode" class="btn btn-gray border border-4 rounded bi bi-moon" @click="toggleDarkMode">
+        </button>
+        <button v-if="isDarkMode" class="btn btn-gray border border-4   bi bi-sun" @click="toggleDarkMode">
+        </button>
+      </div>
     </div>
   </nav>
 </template>

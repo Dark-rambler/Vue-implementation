@@ -1,13 +1,19 @@
 <template>
   <main>
-    <div class="mt-5 d-flex justify-content-between align-items-center">
-      <h2>Lista de usuarios</h2>
-      <div class="input-group mb-3 w-25">
-        <span class="input-group-text bi bi-search"></span>
-        <input type="text" class="form-control" placeholder="Buscar Usuario" aria-label="Username"
-          aria-describedby="basic-addon1" v-model="searchQuery" />
+    <div class="container mt-5 mb-3">
+      <div class="row align-items-center">
+        <div class="col-12 col-sm-auto">
+          <h2>Lista de usuarios</h2>
+        </div>
+        <div class="col-12 col-md-3 ms-md-auto">
+          <div class="input-group">
+            <span class="input-group-text bi bi-search"></span>
+            <input type="text" class="form-control" placeholder="Buscar Usuario" v-model="searchQuery" />
+          </div>
+        </div>
       </div>
     </div>
+
     <AppDataTable :data="filteredUsers" :definition="tableDataDefinition">
       <template #actions="{ row }">
         <button @click="userSelected = row" class="btn btn-danger" type="button" data-bs-toggle="modal"

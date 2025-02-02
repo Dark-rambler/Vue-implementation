@@ -1,23 +1,34 @@
 <template>
-  <div>
-    <table class="table table-hover table-striped table-bordered">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col" class="text-center" v-for="(item, index) in definition" :key="index">{{ item.label }}</th>
-          <th v-if="showActions" class="text-center">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in paginatedData" :key="index" class="">
-          <td>{{ index + 1 + ((currentPage - 1) * itemsPerPage) }}</td>
-          <td v-for="(column, index) in definition" :key="index">{{ item[column.key] }}</td>
-          <td v-if="showActions" class="d-flex justify-content-center">
-            <slot name="actions" :row="item"></slot>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div >
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" class="text-center" v-for="(item, index) in definition" :key="index">{{ item.label }}</th>
+            <th v-if="showActions" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in paginatedData" :key="index" class="">
+            <td>{{ index + 1 + ((currentPage - 1) * itemsPerPage) }}</td>
+            <td v-for="(column, index) in definition" :key="index">{{ item[column.key] }}</td>
+            <td v-if="showActions" class="d-flex justify-content-center">
+              <slot name="actions" :row="item"></slot>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="100%" v-if="!paginatedData.length" class="text-center">No hay datos</td>
+          </tr>
+          <tr>
+            <td colspan="100%" class="text-center">
+              Mostrando
+              {{ (currentPage - 1) * itemsPerPage + paginatedData.length }} de {{ props.data.length }} registros
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <nav class="d-flex justify-content-end">
       <ul class="pagination">
         <li class="page-item" :class="{ disabled: currentPage === 1 }">
