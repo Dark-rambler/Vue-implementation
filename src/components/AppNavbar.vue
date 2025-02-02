@@ -13,10 +13,33 @@
           </li>
         </ul>
       </div>
+      <button v-if="!isDarkMode" class="btn btn-primary bi bi-moon" @click="toggleDarkMode">
+      </button>
+      <button v-if="isDarkMode" class="btn btn-primary bi bi-sun" @click="toggleDarkMode">
+      </button>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
+import { ref, watchEffect } from 'vue';
 import { RouterLink } from 'vue-router';
+const emit = defineEmits(['toggleDarkMode']);
+const isDarkMode = ref(localStorage.getItem("darkMode") === "true");
+
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value;
+  emit('toggleDarkMode');
+};
+
+watchEffect(() => {
+  document.documentElement.setAttribute(
+    "data-bs-theme",
+    isDarkMode.value ? "dark" : "light"
+  );
+});
+
+
+// const toggleDarkMode = () => {
+// };
 </script>
