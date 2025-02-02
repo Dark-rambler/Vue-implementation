@@ -1,6 +1,8 @@
-.cursor-pointer {
+.cursor-pointer:hover {
   cursor: pointer;
 }
+
+
 :root {
   --background-color: #ffffff;
   --text-color: #000000;
