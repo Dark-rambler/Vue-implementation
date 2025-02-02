@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <div class="table-responsive">
       <table class="table table-hover table-striped table-bordered">
         <thead>
@@ -20,9 +20,9 @@
           <tr>
             <td colspan="100%" v-if="!paginatedData.length" class="text-center">No hay datos</td>
           </tr>
-          <tr>
+          <tr v-if="paginatedData.length">
             <td colspan="100%" class="text-center">
-              Mostrando
+              Mostrando {{ (currentPage - 1) * itemsPerPage + 1 }} a
               {{ (currentPage - 1) * itemsPerPage + paginatedData.length }} de {{ props.data.length }} registros
             </td>
           </tr>
