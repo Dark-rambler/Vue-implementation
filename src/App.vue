@@ -1,46 +1,47 @@
 <script setup lang="ts">
-import AppNavbar from "./components/AppNavbar.vue"
-import AppFooter from "./components/AppFooter.vue"
-// import { RouterLink, RouterView } from 'vue-router'
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import AppNavbar from "./components/AppNavbar.vue";
+import AppFooter from "./components/AppFooter.vue";
 
+// Estado del modo oscuro
 const isDarkMode = ref(localStorage.getItem("darkMode") === "true");
 
-// Cambiar el tema
+// Aplicar el tema al cargar la página
+onMounted(() => {
+  document.documentElement.setAttribute("data-bs-theme", isDarkMode.value ? "dark" : "light");
+});
+
 const toggleDarkMode = () => {
   isDarkMode.value = !isDarkMode.value;
   localStorage.setItem("darkMode", isDarkMode.value.toString());
+  document.documentElement.setAttribute("data-bs-theme", isDarkMode.value ? "dark" : "light");
 };
-
-// Aplicar tema al cargar la página
-// watchEffect(() => {
-//   document.documentElement.setAttribute(
-//     "data-bs-theme",
-//     isDarkMode.value ? "dark" : "light"
-//   );
-// });
 </script>
 
 <template>
-
-  <body :data-bs-theme="isDarkMode ? 'dark' : 'light'">
-
-    <AppNavbar
-       @toggleDarkMode="toggleDarkMode"
-    />
-    <!-- <button @click="toggleDarkMode" class="btn btn-primary">
-      Cambiar a {{ isDarkMode ? "Modo Claro" : "Modo Oscuro" }}
-    </button> -->
-    <main>
-
+  <div class="app-container">
+    <AppNavbar @toggleDarkMode="toggleDarkMode" />
+    <main class="content">
       <div class="container-md">
         <RouterView />
       </div>
-      <AppFooter />
-
     </main>
-  </body>
-
-  <!-- <RouterView /> -->
+    <AppFooter class="footer" />
+  </div>
 </template>
-<style></style>
+
+<style scoped>
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content {
+  flex: 1;
+}
+
+.footer {
+  flex-shrink: 0;
+}
+</style>

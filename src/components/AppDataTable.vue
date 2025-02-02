@@ -20,16 +20,16 @@
         </tr>
       </tbody>
     </table>
-    <nav class="d-flex justify-content-center">
+    <nav class="d-flex justify-content-end">
       <ul class="pagination">
         <li class="page-item" :class="{ disabled: currentPage === 1 }">
-          <a class="page-link" href="#" @click="prevPage">Previous</a>
+          <a class="page-link bi bi-arrow-left" href="#" @click="prevPage"></a>
         </li>
         <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: currentPage === page }">
-          <a class="page-link" href="#" @click="goToPage(page)">{{ page }}</a>
+          <a class="page-link " href="#" @click="goToPage(page)">{{ page }}</a>
         </li>
         <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-          <a class="page-link" href="#" @click="nextPage">Next</a>
+          <a class="page-link bi bi-arrow-right" href="#" @click="nextPage"></a>
         </li>
       </ul>
     </nav>
@@ -83,7 +83,6 @@ const prevPage = () => {
   }
 };
 
-// Determinar si se debe mostrar la columna de acciones
 const showActions = computed(() => !!slots.actions);
 </script>
 
