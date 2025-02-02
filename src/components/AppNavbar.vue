@@ -8,7 +8,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item mt-1 ">
             <RouterLink to="/" class="nav-link active" aria-current="page" href="#">Usuarios</RouterLink>
           </li>
           <div class="d-block d-lg-none">

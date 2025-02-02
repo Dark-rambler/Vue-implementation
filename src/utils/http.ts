@@ -1,4 +1,3 @@
-// src/utils/http.ts
 import axios, {  AxiosError, type AxiosResponse } from 'axios';
 
 /**

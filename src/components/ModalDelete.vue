@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import type { User } from '@/interfaces/dataTable.interface';
+import type { User } from '@/interfaces/user.interface';
 import { defineProps } from 'vue';
 
 interface ModalDeleteProps {

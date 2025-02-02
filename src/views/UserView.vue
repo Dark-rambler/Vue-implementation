@@ -35,7 +35,7 @@
 import AppDataTable from '@/components/AppDataTable.vue';
 import ModalCamera from '@/components/ModalCamera.vue';
 import ModalDelete from '@/components/ModalDelete.vue';
-import type { responseUser, User } from '@/interfaces/dataTable.interface';
+import type { responseUser, User } from '@/interfaces/user.interface';
 import { getRequest } from '@/utils/http';
 import { getUserTableDefinition } from '@/utils/tableDefinitions';
 import { ref, computed, onMounted } from 'vue';
